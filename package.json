@@ -1,0 +1,9 @@
+{
+  "name": "pencilsensei",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check src/app.js && node --check src/drawing.js && node --check src/coach.js && node --check src/db.js && node --check src/packet.js && node --check sw.js"
+  }
+}
