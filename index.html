@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f4f1ea">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <title>PencilSensei</title>
+</head>
+<body>
+  <div id="app" class="app-shell">
+    <header class="topbar">
+      <div>
+        <div class="brand">PencilSensei</div>
+        <div class="subbrand">描くたびに、少しだけうまくなる。</div>
+      </div>
+      <div class="topbar-actions">
+        <button id="historyButton" class="button secondary" type="button">履歴</button>
+        <button id="finishButton" class="button" type="button">保存 & Packet</button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="pane reference-pane" aria-label="Reference">
+        <div class="pane-head">
+          <div>
+            <div class="eyebrow">REFERENCE</div>
+            <div id="referenceTitle" class="pane-title">参照画像を入れる</div>
+          </div>
+          <label class="button secondary file-button">
+            画像
+            <input id="referenceInput" type="file" accept="image/*" hidden>
+          </label>
+        </div>
+        <div id="referenceStage" class="reference-stage">
+          <div id="referenceEmpty" class="empty-state">
+            <strong>画像をドロップ</strong>
+            <span>写真でも、スケッチでもいい。</span>
+          </div>
+          <img id="referenceImage" alt="Drawing reference" hidden>
+        </div>
+      </section>
+
+      <section class="pane drawing-pane" aria-label="Drawing">
+        <div class="pane-head">
+          <div>
+            <div class="eyebrow">DRAW</div>
+            <div class="pane-title"><span id="strokeCount">0</span> strokes</div>
+          </div>
+          <div class="tool-row" role="toolbar" aria-label="Drawing tools">
+            <button id="penButton" class="tool active" type="button" aria-pressed="true">Pen</button>
+            <button id="eraserButton" class="tool" type="button" aria-pressed="false">Eraser</button>
+            <button id="undoButton" class="tool" type="button">Undo</button>
+            <button id="clearButton" class="tool" type="button">Clear</button>
+          </div>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="drawingCanvas" aria-label="Drawing canvas"></canvas>
+          <div id="cueBubble" class="cue-bubble" hidden>
+            <div id="cueText" class="cue-text"></div>
+            <div class="cue-actions">
+              <button id="cueFixed" type="button">直せた</button>
+              <button id="cueHint" type="button">もう一段</button>
+              <button id="cueWrong" type="button">違う</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="bottom-bar">
+          <label class="brush-control">
+            <span>Size</span>
+            <input id="brushSize" type="range" min="1" max="18" step="1" value="3">
+          </label>
+          <button id="checkButton" class="button check" type="button">Check</button>
+          <div id="statusText" class="status-text" aria-live="polite">監視中。基本は黙ります。</div>
+        </div>
+      </section>
+    </main>
+
+    <aside id="historyDrawer" class="drawer" hidden>
+      <div class="drawer-head">
+        <div>
+          <div class="eyebrow">LEARNING HISTORY</div>
+          <h2>最近のセッション</h2>
+        </div>
+        <button id="closeHistory" class="button secondary" type="button">閉じる</button>
+      </div>
+      <div id="historyList" class="history-list"></div>
+    </aside>
+  </div>
+
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>
